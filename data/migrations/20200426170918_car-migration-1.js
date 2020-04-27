@@ -6,7 +6,9 @@ exports.up = async function(knex) {
         table.increments("id");
         table.text("name").notNull().unique();
         table.text("color").notNull();
-        table.boolean("ugly").notNull().defaultToTrue();
+        table.text("make").notNull();
+        table.text("model").notNull();
+        table.boolean("ugly").notNull().defaultTo(true);
     })
   
 };
