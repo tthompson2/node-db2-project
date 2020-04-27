@@ -1,5 +1,5 @@
 const express = require("express");
-const db = require("../data/confg");
+const db = require("../data/config");
 
 const router = express.Router();
 
@@ -13,10 +13,10 @@ router.get("/", async (req, res, next) => {
     }
 })
 
-router.get(":/id", async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
     try {
         const { id } = req.params // why is this not req.params.id
-        const cars = await cars("cars").where({ id });
+        const cars = await db("cars").where({ id });
 
         res.json(cars)
     } catch (err) {
@@ -27,7 +27,7 @@ router.get(":/id", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
     try {
         const carData = req.body;
-        const [id] = await db("cars").where({ id });
+        const [id] = await db("cars").insert(carData);
         const newCar = await db("fruits").where({ id });
 
         res.status(201).json(newCar);
@@ -36,12 +36,12 @@ router.post("/", async (req, res, next) => {
     }
 })
 
+
 // router.delete("/:id", async (req, res, next) => {
 
 //     try {
 //         const { id } = req.params;
 //         const cars = await db("cars").where({ id });
-
 //         res.json(cars);
 //     } catch (err) {
 //         next(err);
