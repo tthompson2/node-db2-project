@@ -1,8 +1,7 @@
-const express = require("express");
-const helmet = require("helmet");
+const server = require("./api/server");
 
-const server = express();
-const port = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5004;
 
-server.use(helmet());
-server.use(express.json());
+server.listen(PORT, () => {
+    console.log(`\n== API running on port ${PORT} == \n`);
+});
