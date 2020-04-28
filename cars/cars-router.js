@@ -28,7 +28,7 @@ router.post("/", async (req, res, next) => {
     try {
         const carData = req.body;
         const [id] = await db("cars").insert(carData);
-        const newCar = await db("fruits").where({ id });
+        const newCar = await db("cars").where({ id });
 
         res.status(201).json(newCar);
     } catch (err) {
@@ -37,15 +37,15 @@ router.post("/", async (req, res, next) => {
 })
 
 
-// router.delete("/:id", async (req, res, next) => {
+router.delete("/:id", async (req, res, next) => {
 
-//     try {
-//         const { id } = req.params;
-//         const cars = await db("cars").where({ id });
-//         res.json(cars);
-//     } catch (err) {
-//         next(err);
-//     }
-// })
+    try {
+        const { id } = req.params;
+        const cars = await db("cars").where({ id });
+        res.json(cars);
+    } catch (err) {
+        next(err);
+    }
+})
 
 module.exports = router;
